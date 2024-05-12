@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Mathpad</title>
+  <link href="style/main.css" rel="stylesheet" type="text/css" />
+  <link href="style/sidebar.css" rel="stylesheet" type="text/css" />
+  <link href="style/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <link rel="stylesheet" href="lib/mathquill/mathquill.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="lib/mathquill/mathquill.js"></script>
+</head>
+
+<body>
+  <div class="app-chrome">
+    <div class="app-sidebar">
+      <div class="sidebar-header">
+        <h2>全てのメモ</h2>
+      </div>
+      <div class="sidebar-content">
+        <ul class="memo-list">
+          <li class="memo-list-item selected">
+            <span class="memo-list-item-label">テストですと</span>
+          </li>
+          <li class="memo-list-item">
+            <span class="memo-list-item-label">テストですよ</span>
+          </li>
+          <li class="memo-list-item">
+            <span class="memo-list-item-label">テストでした</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="app-content">
+      <div class="mp-editor" contenteditable="true">2次方程式 <span class="math-span" contenteditable="false">\(ax^2 + bx + c = 0\)</span> の<b>解の公式</b>は<span class="math-span" contenteditable="false">\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\)</span><span class="normal-text">でーす。</span></div>
+      <div class="mp-toolbar">
+        <span id="mq-editable-field"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // MathQuillを初期化する関数
+    function initMathQuill() {
+      // MathQuillエディタを含む要素を取得
+      var MqEditableField = document.getElementById('mq-editable-field');
+
+      // MathQuillエディタを初期化
+      var MqMathEditor = MathQuill.getInterface(2).MathField(MqEditableField, {
+        handlers: {
+          edit: function() {
+            // エディタの内容が変更されたときの処理
+            console.log(MqMathEditor.latex()); // LaTeX形式での内容をログに出力
+          }
+        }
+      });
+    }
+
+    // ページが読み込まれたときにMathQuillを初期化
+    window.onload = initMathQuill;
+  </script>
+</body>
+
+</html>
