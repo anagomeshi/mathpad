@@ -1,8 +1,10 @@
 var CACHE_NAME = 'mathpad';
-// var urlsToCache = [
-//     '/digital/src/script.js',
-//     '/digital/style/style.css'
-// ];
+var urlsToCache = [
+    'src/ribbon/ribbon-tab.js',
+    'resource/style/content.css',
+    'resource/style/main.css',
+    'resource/style/sidebar.css'
+];
 
 // インストール処理
 self.addEventListener('install', function(event) {
