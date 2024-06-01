@@ -1,0 +1,158 @@
+/* コンテンツ */
+.app-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+/* リボン */
+.ribbon{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 140px;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+
+.ribbon-header{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 40px;
+  padding: 3px 5px;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.ribbon-header-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 6px;
+  background-color: transparent;
+  color: #242424;
+  font-weight: normal;
+  border: none;
+  box-sizing: border-box;
+}
+
+.ribbon-header-button-title{
+  margin: 0 4px;
+  white-space: nowrap;
+}
+
+.ribbon-header-button:hover .ribbon-header-button-title{
+  margin-top: 3px;
+  border-bottom: 3px solid #d3d3d3;
+}
+
+.ribbon-header-button.selected .ribbon-header-button-title{
+  margin-top: 3px;
+  font-weight: bold;
+  border-bottom: 3px solid #6557d2;
+}
+
+.ribbon-content-container{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.ribbon-content{
+  position: absolute;
+  top: 0;
+  left: -30000px;
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 16px);
+  height: calc(100% - 8px);
+  margin: 4px 8px;
+  box-sizing: border-box;
+}
+
+.ribbon-content.show{
+  left: 0;
+}
+
+.ribbon-content-group{
+  height: 100%;
+  padding: 5px;
+  border-right: 1px solid #d3d3d3;
+  box-sizing: border-box;
+}
+
+/* エディタ */
+.editor{
+  position: absolute;
+  top: 140px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 180px);
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#mq-editable-field{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-size: 22px;
+  border: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.mq-root-block{
+  width: auto;
+  overflow: auto;
+}
+
+/* フッター */
+.footer{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  height: 40px;
+  padding: 5px 15px;
+  background-color: #f3f3f3;
+  border-top: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+
+.footer>p{
+  margin: 0;
+  color: #242424;
+}
+
+.copy-button{
+  height: 100%;
+  padding: 3px 20px;
+  margin-left: 15px;
+  background-color: #6557d2;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
