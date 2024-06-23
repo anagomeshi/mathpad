@@ -11,7 +11,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="lib/mathquill/mathquill.js"></script>
   <link rel="stylesheet" href="lib/mathquill/mathquill.css"/>
-  <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -88,18 +87,6 @@
         edit: function(){}
       }
     });
-  </script>
-  
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js').then(function(registration) {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      });
-    }
   </script>
   
 </body>
