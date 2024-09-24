@@ -1,94 +1,572 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Mathpad</title>
-  <link href="resource/style/content.css" rel="stylesheet" type="text/css" />
-  <link href="resource/style/main.css" rel="stylesheet" type="text/css" />
-  <link href="resource/style/sidebar.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="lib/mathquill.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="lib/mathquill/mathquill.js"></script>
-  <link rel="stylesheet" href="lib/mathquill/mathquill.css"/>
+  <script src="lib/mathquill.min.js"></script>
 </head>
 
 <body>
   <div class="app-chrome">
-    <div class="app-sidebar">
-      <div class="sidebar-header">
-        <h2>全てのメモ</h2>
+    <div class="app-header">
+      <div class="app-header-left-container">
+        <a class="app-brand" href="/">
+          <img src="assets/icons/logo.svg" alt="Mathpad" draggable="false">
+          <span>Mathpad</span>
+        </a>
       </div>
-      <div class="sidebar-content">
-        <ul class="memo-list">
-          <li class="memo-list-item">
-            <span class="memo-list-item-label">テストですと</span>
-          </li>
-          <li class="memo-list-item">
-            <span class="memo-list-item-label">テストですよ</span>
-          </li>
-          <li class="memo-list-item">
-            <span class="memo-list-item-label">テストでした</span>
-          </li>
-        </ul>
+      <div class="app-header-right-container">
+        <button class="copy-button">
+          <span>数式をコピー</span>
+          <img src="assets/icons/arrow-down.svg" alt="" draggable="false">
+        </button>
       </div>
     </div>
     <div class="app-content">
       <div class="ribbon">
-        <div class="ribbon-header">
-          <button class="ribbon-header-button selected" data-tab="0">
-            <span class="ribbon-header-button-title">ギリシャ文字</span>
+        <div class="ribbon-tab-container">
+          <button class="ribbon-tab tab-selected" data-tab="basic">
+            <span class="ribbon-tab-label">基本数式</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
-          <button class="ribbon-header-button" data-tab="1">
-            <span class="ribbon-header-button-title">文字様記号</span>
+          <button class="ribbon-tab" data-tab="operators">
+            <span class="ribbon-tab-label">演算子</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
-          <button class="ribbon-header-button" data-tab="2">
-            <span class="ribbon-header-button-title">演算子</span>
+          <button class="ribbon-tab" data-tab="relation">
+            <span class="ribbon-tab-label">関係演算子</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
-          <button class="ribbon-header-button" data-tab="3">
-            <span class="ribbon-header-button-title">矢印</span>
+          <button class="ribbon-tab" data-tab="arrows">
+            <span class="ribbon-tab-label">矢印</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
-          <button class="ribbon-header-button" data-tab="4">
-            <span class="ribbon-header-button-title">幾何学記号</span>
+          <button class="ribbon-tab" data-tab="greek">
+            <span class="ribbon-tab-label">ギリシャ文字</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
-          <button class="ribbon-header-button" data-tab="5">
-            <span class="ribbon-header-button-title">大型演算子</span>
+          <button class="ribbon-tab" data-tab="functions">
+            <span class="ribbon-tab-label">関数</span>
+            <div class="ribbon-tab-border-container"></div>
+          </button>
+          <button class="ribbon-tab" data-tab="big-operators">
+            <span class="ribbon-tab-label">大型演算子</span>
+            <div class="ribbon-tab-border-container"></div>
           </button>
         </div>
         <div class="ribbon-content-container">
-          <div class="ribbon-content show" id="0">
+          <div class="ribbon-content tab-show" id="basic">
             <div class="ribbon-content-group">
-              
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="分数 (縦)" data-latex="\frac{⬚}{⬚}"></button>
+                <button class="ribbon-content-tool-button normal" title="分数 (横)" data-latex="⬚/⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="平方根" data-latex="\sqrt{⬚}"></button>
+                <button class="ribbon-content-tool-button normal" title="次数付きべき乗根" data-latex="\sqrt[⬚]{⬚}"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="上付き文字" data-latex="⬚^⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="下付き文字" data-latex="⬚_⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="括弧" data-latex="\left(⬚\right)"></button>
+                <button class="ribbon-content-tool-button normal" title="縦棒" data-latex="\left|⬚\right|"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="大カッコ" data-latex="\left[⬚\right]"></button>
+                <button class="ribbon-content-tool-button normal" title="波カッコ" data-latex="\left\{⬚\right\}"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="和算記号" data-latex="+"></button>
+                <button class="ribbon-content-tool-button small" title="乗算記号" data-latex="\times"></button>
+                <button class="ribbon-content-tool-button small" title="減算記号" data-latex="-"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="除算記号 (スラッシュ)" data-latex="/"></button>
+                <button class="ribbon-content-tool-button small" title="プラスマイナス" data-latex="\pm"></button>
+                <button class="ribbon-content-tool-button small" title="除算記号" data-latex="\div"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="次の値以上" data-latex="\geq"></button>
+                <button class="ribbon-content-tool-button small" title="要素である" data-latex="\in"></button>
+                <button class="ribbon-content-tool-button small" title="和集合" data-latex="\cup"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="次の値以下" data-latex="\leq"></button>
+                <button class="ribbon-content-tool-button small" title="真部分集合として含まれる" data-latex="\subset"></button>
+                <button class="ribbon-content-tool-button small" title="積集合" data-latex="\cap"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="空集合" data-latex="\varnothing"></button>
+                <button class="ribbon-content-tool-button small" title="無限" data-latex="\infty"></button>
+                <button class="ribbon-content-tool-button small" title="パイ" data-latex="\pi"></button>
+              </div>
             </div>
           </div>
-          <div class="ribbon-content" id="1"></div>
-          <div class="ribbon-content" id="2"></div>
-          <div class="ribbon-content" id="3"></div>
-          <div class="ribbon-content" id="4"></div>
-          <div class="ribbon-content" id="5"></div>
+          <div class="ribbon-content" id="operators">
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="和算記号" data-latex="+"></button>
+                <button class="ribbon-content-tool-button small" title="減算記号" data-latex="-"></button>
+                <button class="ribbon-content-tool-button small" title="プラスマイナス" data-latex="\pm"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="マイナスプラス" data-latex="\mp"></button>
+                <button class="ribbon-content-tool-button small" title="乗算記号" data-latex="\times"></button>
+                <button class="ribbon-content-tool-button small" title="除算記号" data-latex="\div"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="アスタリスク" data-latex="\ast"></button>
+                <button class="ribbon-content-tool-button small" title="乗算記号 (ドット)" data-latex="\cdot"></button>
+                <button class="ribbon-content-tool-button small" title="ドット" data-latex="∙"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="除算記号 (スラッシュ)" data-latex="/"></button>
+                <button class="ribbon-content-tool-button small" title="合成関数" data-latex="\circ"></button>
+                <button class="ribbon-content-tool-button small" title="パーセント" data-latex="\%"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="直和" data-latex="\oplus"></button>
+                <button class="ribbon-content-tool-button small" title="テンソル積" data-latex="\otimes"></button>
+                <button class="ribbon-content-tool-button small" title="ダイアモンド" data-latex="\diamond"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="対称差" data-latex="\ominus"></button>
+                <button class="ribbon-content-tool-button small" title="アダマール積" data-latex="\odot"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="和集合" data-latex="\cup"></button>
+                <button class="ribbon-content-tool-button small" title="論理和" data-latex="\vee"></button>
+                <button class="ribbon-content-tool-button small" title="存在" data-latex="\exists"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="積集合" data-latex="\cap"></button>
+                <button class="ribbon-content-tool-button small" title="論理積" data-latex="\wedge"></button>
+                <button class="ribbon-content-tool-button small" title="空集合" data-latex="\varnothing"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="否定" data-latex="\neg"></button>
+                <button class="ribbon-content-tool-button small" title="全称記号" data-latex="\forall"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="パイ" data-latex="\pi"></button>
+                <button class="ribbon-content-tool-button small" title="対称差" data-latex="\bigtriangleup"></button>
+                <button class="ribbon-content-tool-button small" title="シングルクオーテーション" data-latex="'"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="無限" data-latex="\infty"></button>
+                <button class="ribbon-content-tool-button small" title="逆三角" data-latex="\bigtriangledown"></button>
+                <button class="ribbon-content-tool-button small" title="シングルクオーテーション" data-latex='"'></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="階乗" data-latex="!"></button>
+                <button class="ribbon-content-tool-button small" title="偏微分" data-latex="\partial"></button>
+                <button class="ribbon-content-tool-button small" title="補集合" data-latex="∁"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="角度" data-latex="\angle"></button>
+                <button class="ribbon-content-tool-button small" title="平行ではない" data-latex="∦"></button>
+                <button class="ribbon-content-tool-button small" title="度" data-latex="\degree"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="測定した角度" data-latex="\measuredangle"></button>
+                <button class="ribbon-content-tool-button small" title="直角" data-latex="∟"></button>
+                <button class="ribbon-content-tool-button small" title="したがって" data-latex="\therefore"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="平行" data-latex="\parallel"></button>
+                <button class="ribbon-content-tool-button small" title="垂直" data-latex="\bot"></button>
+                <button class="ribbon-content-tool-button small" title="なぜならば" data-latex="\because"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="四角" data-latex="\square"></button>
+                <button class="ribbon-content-tool-button small" title="三角形" data-latex="\triangle"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon-content" id="relation">
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="等号" data-latex="="></button>
+                <button class="ribbon-content-tool-button small" title="相似" data-latex="\sim"></button>
+                <button class="ribbon-content-tool-button small" title="漸近的に等しい" data-latex="\simeq"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="合同" data-latex="\equiv"></button>
+                <button class="ribbon-content-tool-button small" title="ほぼ等しい" data-latex="\approx"></button>
+                <button class="ribbon-content-tool-button small" title="およそ等しい" data-latex="\cong"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="等しくない" data-latex="\neq"></button>
+                <button class="ribbon-content-tool-button small" title="チルダの否定" data-latex="≁"></button>
+                <button class="ribbon-content-tool-button small" title="漸近的に等しくない" data-latex="≄"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="合同でない" data-latex="≢"></button>
+                <button class="ribbon-content-tool-button small" title="ほぼ等しくない" data-latex="≉"></button>
+                <button class="ribbon-content-tool-button small" title="およそ等しくなく、実際に等しくない" data-latex="≇"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="大なり記号" data-latex=">"></button>
+                <button class="ribbon-content-tool-button small" title="次の値以上" data-latex="\ge"></button>
+                <button class="ribbon-content-tool-button small" title="非常に大きい" data-latex="\gg"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="小なり記号" data-latex="<"></button>
+                <button class="ribbon-content-tool-button small" title="次の値以下" data-latex="\leq"></button>
+                <button class="ribbon-content-tool-button small" title="非常に大きい" data-latex="\ll"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="次の値より大きくない" data-latex="≯"></button>
+                <button class="ribbon-content-tool-button small" title="大きくなく、かつ等しくない" data-latex="≱"></button>
+                <button class="ribbon-content-tool-button small" title="同値" data-latex="≍"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="次の値より小さくない" data-latex="≮"></button>
+                <button class="ribbon-content-tool-button small" title="小さくなく、かつ等しくない" data-latex="≰"></button>
+                <button class="ribbon-content-tool-button small" title="比例" data-latex="\propto"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="要素である" data-latex="∈"></button>
+                <button class="ribbon-content-tool-button small" title="真部分集合として含まれる" data-latex="⊂"></button>
+                <button class="ribbon-content-tool-button small" title="部分集合として含まれる" data-latex="⊆"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="元として含む" data-latex="∋"></button>
+                <button class="ribbon-content-tool-button small" title="上位集合として含む" data-latex="⊃"></button>
+                <button class="ribbon-content-tool-button small" title="部分集合として含む" data-latex="⊇"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="要素でない" data-latex="∉"></button>
+                <button class="ribbon-content-tool-button small" title="真部分集合として含まれない" data-latex="⊄"></button>
+                <button class="ribbon-content-tool-button small" title="部分集合として含まれない" data-latex="⊈"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="元として含まない" data-latex="∌"></button>
+                <button class="ribbon-content-tool-button small" title="真部分集合として含まない" data-latex="⊅"></button>
+                <button class="ribbon-content-tool-button small" title="部分集合として含まない" data-latex="⊉"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="自然数の全体集合" data-latex="ℕ"></button>
+                <button class="ribbon-content-tool-button small" title="有理数の全体集合" data-latex="ℚ"></button>
+                <button class="ribbon-content-tool-button small" title="実数の全体集合" data-latex="ℝ"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="整数の全体集合" data-latex="ℤ"></button>
+                <button class="ribbon-content-tool-button small" title="複素数の全体集合" data-latex="ℂ"></button>
+                <button class="ribbon-content-tool-button small" title="アレフ" data-latex="\aleph"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="先行する" data-latex="≺"></button>
+                <button class="ribbon-content-tool-button small" title="先行するか等しい" data-latex="≼"></button>
+                <button class="ribbon-content-tool-button small" title="正規部分群" data-latex="⊲"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="後続する" data-latex="≻"></button>
+                <button class="ribbon-content-tool-button small" title="後続するか等しい" data-latex="≽"></button>
+                <button class="ribbon-content-tool-button small" title="正規部分群として含む" data-latex="⊳"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="像 (角形)" data-latex="⊏"></button>
+                <button class="ribbon-content-tool-button small" title="像 (角形)か等しい" data-latex="⊑"></button>
+                <button class="ribbon-content-tool-button small" title="証明される (意味する、導出される)" data-latex="⊢"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="原像 (角形)" data-latex="⊐"></button>
+                <button class="ribbon-content-tool-button small" title="原像 (角形)か等しい" data-latex="⊒"></button>
+                <button class="ribbon-content-tool-button small" title="導出されない" data-latex="⊣"></button>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon-content" id="arrows">
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="左向き矢印" data-latex="←"></button>
+                <button class="ribbon-content-tool-button small" title="左向き二重矢印" data-latex="⇐"></button>
+                <button class="ribbon-content-tool-button small" title="斜め右上向き矢印" data-latex="↗"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="右向き矢印" data-latex="→"></button>
+                <button class="ribbon-content-tool-button small" title="右向き二重矢印" data-latex="⇒"></button>
+                <button class="ribbon-content-tool-button small" title="斜め左上向き矢印" data-latex="↖"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="左右双方向矢印" data-latex="↔"></button>
+                <button class="ribbon-content-tool-button small" title="左右双方向二重矢印" data-latex="⇔"></button>
+                <button class="ribbon-content-tool-button small" title="斜め右下向き矢印" data-latex="↘"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="上向き矢印" data-latex="↑"></button>
+                <button class="ribbon-content-tool-button small" title="上向き二重矢印" data-latex="⇑"></button>
+                <button class="ribbon-content-tool-button small" title="斜め左下向き矢印" data-latex="↙"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="下向き矢印" data-latex="↓"></button>
+                <button class="ribbon-content-tool-button small" title="下向き二重矢印" data-latex="⇓"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="上下双方向矢印" data-latex="↕"></button>
+                <button class="ribbon-content-tool-button small" title="上下双方向二重矢印" data-latex="⇕"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="左向きペア矢印" data-latex="⇇"></button>
+                <button class="ribbon-content-tool-button small" title="上向き二重矢印" data-latex="⇑"></button>
+                <button class="ribbon-content-tool-button small" title="斜め左下向き矢印" data-latex="↙"></button>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon-content" id="greek">
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="アルファ" data-latex="\alpha"></button>
+                <button class="ribbon-content-tool-button small" title="カッパ" data-latex="\kappa"></button>
+                <button class="ribbon-content-tool-button small" title="シグマ (別形)" data-latex="\sigma"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="ベータ" data-latex="\beta"></button>
+                <button class="ribbon-content-tool-button small" title="ラムダ" data-latex="\lambda"></button>
+                <button class="ribbon-content-tool-button small" title="タウ" data-latex="\tau"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="ガンマ" data-latex="\gamma"></button>
+                <button class="ribbon-content-tool-button small" title="ミュウ" data-latex="\mu"></button>
+                <button class="ribbon-content-tool-button small" title="ウプシロン" data-latex="\upsilon"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="デルタ" data-latex="\delta"></button>
+                <button class="ribbon-content-tool-button small" title="ニュウ" data-latex="\nu"></button>
+                <button class="ribbon-content-tool-button small" title="ファイ" data-latex="\varphi"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="イプシロン" data-latex="\epsilon"></button>
+                <button class="ribbon-content-tool-button small" title="クサイ" data-latex="\xi"></button>
+                <button class="ribbon-content-tool-button small" title="ファイ (別形)" data-latex="\phi"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="ゼータ" data-latex="\zeta"></button>
+                <button class="ribbon-content-tool-button small" title="オミクロン" data-latex="o"></button>
+                <button class="ribbon-content-tool-button small" title="カイ" data-latex="\chi"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="イータ" data-latex="\eta"></button>
+                <button class="ribbon-content-tool-button small" title="パイ" data-latex="\pi"></button>
+                <button class="ribbon-content-tool-button small" title="プサイ" data-latex="\psi"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="シータ" data-latex="\theta"></button>
+                <button class="ribbon-content-tool-button small" title="パイ (別形)" data-latex="\varpi"></button>
+                <button class="ribbon-content-tool-button small" title="オメガ" data-latex="\omega"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="シータ (別形)" data-latex="\vartheta"></button>
+                <button class="ribbon-content-tool-button small" title="ロー" data-latex="\rho"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button small" title="イオタ" data-latex="\iota"></button>
+                <button class="ribbon-content-tool-button small" title="シグマ" data-latex="\varsigma"></button>
+                <div class="ribbon-content-tool-space small"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon-content" id="functions">
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="正弦関数" data-latex="\sin⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="余弦関数" data-latex="\cos⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="正接関数" data-latex="\tan⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="余接関数" data-latex="\cot⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="正割関数" data-latex="\sec⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="余割関数" data-latex="\csc⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆正弦関数" data-latex="\sin^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆余弦関数" data-latex="\cos^{-1}⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆正接関数" data-latex="\tan^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆余接関数" data-latex="\cot^{-1}⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆正割関数" data-latex="\sec^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆余割関数" data-latex="\csc^{-1}⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークサイン" data-latex="\arcsin⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークコサイン" data-latex="\arccos⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークタンジェント" data-latex="\arctan⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークコタンジェント" data-latex="\arccot⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークセカント" data-latex="\arcsec⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークコセカント" data-latex="\arccsc⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="双曲線正弦関数" data-latex="\sinh⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="双曲線余弦関数" data-latex="\cosh⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="双曲線正接関数" data-latex="\tanh⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="双曲線余接関数" data-latex="\coth⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="双曲線正割関数" data-latex="\sech⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="双曲線余割関数" data-latex="\csch⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆双曲線正弦関数" data-latex="\sinh^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆双曲線余弦関数" data-latex="\cosh^{-1}⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆双曲線正接関数" data-latex="\tanh^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆双曲線余接関数" data-latex="\coth^{-1}⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="逆双曲線正割関数" data-latex="\sech^{-1}⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="逆双曲線余割関数" data-latex="\csch^{-1}⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークハイパボリックサイン" data-latex="\arcsinh⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークハイパボリックコサイン"
+                  data-latex="\arccosh⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークハイパボリックタンジェント"
+                  data-latex="\arctanh⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークコタンジェントハイパボリック"
+                  data-latex="\arccoth⬚"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="アークセカントハイパボリック"
+                  data-latex="\arcsech⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="アークコセカントハイパボリック"
+                  data-latex="\arccsch⬚"></button>
+              </div>
+            </div>
+            <div class="ribbon-content-group">
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="自然対数" data-latex="\ln⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="対数 (底は空白)" data-latex="\log_⬚{⬚}"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="対数 (底なし)" data-latex="\log⬚"></button>
+                <button class="ribbon-content-tool-button normal" title="制限" data-latex="\lim_⬚{⬚}"></button>
+              </div>
+              <div class="ribbon-content-tool-area">
+                <button class="ribbon-content-tool-button normal" title="最小値" data-latex="\min_⬚{⬚}"></button>
+                <button class="ribbon-content-tool-button normal" title="最大値" data-latex="\max_⬚{⬚}"></button>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon-content" id="big-operators"></div>
         </div>
+        <div class="quickaccess-toolbar"></div>
       </div>
       <div class="editor">
         <span id="mq-editable-field"></span>
       </div>
-      <div class="footer">
-        <p>数式は画像形式でコピーされます</p>
-        <button class="copy-button">数式をコピー</button>
-      </div>
+    </div>
+    <div class="app-mask"></div>
+    <div class="context-menu">
+      <ul class="context-menu-list">
+        <li class="context-menu-list-item">画像(png)としてコピー</li>
+        <li class="context-menu-list-item">LaTeX形式でコピー</li>
+        <li class="context-menu-list-item">MathML形式でコピー</li>
+      </ul>
     </div>
   </div>
 
-  <script type="text/javascript" src="src/ribbon/ribbon-tab.js"></script>
+  <script type="text/javascript" src="src/ribbon-tab.js"></script>
+  <script type="text/javascript" src="src/context-menu.js"></script>
   <script type="text/javascript">
-    let MQ = MathQuill.getInterface(2);
-    let MqEditableField = document.getElementById('mq-editable-field');
-    let MqMathEditor = MQ.MathField(MqEditableField,{
-      handlers:{
-        edit: function(){}
-      }
+    const MQ = MathQuill.getInterface(2);
+    const MqEditableField = document.getElementById('mq-editable-field');
+    const RibbonContentToolButtons = document.querySelectorAll('.ribbon-content-tool-button');
+    const MqMathEditor = MQ.MathField(MqEditableField);
+
+    RibbonContentToolButtons.forEach(RibbonContentToolButton => {
+      const latex = RibbonContentToolButton.getAttribute('data-latex');
+      const MqStaticField = MQ.StaticMath(RibbonContentToolButton);
+      MqStaticField.latex(latex);
+      RibbonContentToolButton.addEventListener('click', insertFormula);
     });
+
+    function insertFormula(e) {
+      let formula = e.target.closest('.ribbon-content-tool-button').getAttribute('data-latex').replace(/⬚/g, '');
+      if (formula === '\\frac{}{}') {
+        MqMathEditor.cmd('\\frac');
+      } else if (formula === '\\sqrt{}') {
+        MqMathEditor.cmd('\\sqrt');
+      } else if (formula === '\\sqrt[]{}') {
+        MqMathEditor.cmd('\\nthroot');
+      } else if (formula === '^') {
+        MqMathEditor.cmd('^');
+      } else if (formula === '_') {
+        MqMathEditor.cmd('_');
+      } else {
+        MqMathEditor.write(formula);
+      }
+      MqMathEditor.focus();
+    }
   </script>
-  
+
 </body>
 
 </html>
