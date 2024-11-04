@@ -54,7 +54,7 @@ textarea {
 .app-chrome {
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -128,7 +128,7 @@ textarea {
 .app-content {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -206,7 +206,7 @@ textarea {
 .ribbon-content-container {
   position: relative;
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -289,8 +289,7 @@ textarea {
 
 /* エディタ */
 .editor {
-  display: flex;
-  flex: 1 1 auto;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
   background-color: #ffffff;
