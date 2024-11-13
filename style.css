@@ -27,7 +27,7 @@ textarea {
   cursor: default;
 }
 
-.editor ::-webkit-scrollbar {
+.editor-container ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
   cursor: default;
@@ -54,11 +54,9 @@ textarea {
 .app-chrome {
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  z-index: 1;
 }
 
 /* ヘッダー */
@@ -128,7 +126,7 @@ textarea {
 .app-content {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -141,7 +139,6 @@ textarea {
   flex-direction: column;
   flex: 0 0 auto;
   width: 100%;
-  height: 140px;
   padding: 0 8px;
   box-sizing: border-box;
   -webkit-user-select: none;
@@ -151,7 +148,6 @@ textarea {
 .ribbon-tab-container {
   display: flex;
   flex-direction: row;
-  flex: 0 0 auto;
   width: 100%;
   height: 36px;
   padding: 1px 0 6px 0;
@@ -180,6 +176,10 @@ textarea {
   white-space: nowrap;
 }
 
+.ribbon-tab:hover .ribbon-tab-label{
+  color: #242424;
+}
+
 .ribbon-tab.tab-selected .ribbon-tab-label{
   color: #242424;
   font-weight: 600;
@@ -197,7 +197,7 @@ textarea {
 }
 
 .ribbon-tab:hover .ribbon-tab-border-container{
-  background-color: #cccccc;
+  background-color: #c7c7c7;
 }
 
 .ribbon-tab.tab-selected .ribbon-tab-border-container{
@@ -207,9 +207,8 @@ textarea {
 .ribbon-content-container {
   position: relative;
   display: flex;
-  flex: 1 1 auto;
   width: 100%;
-  height: 100%;
+  height: 100px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14);
@@ -292,21 +291,26 @@ textarea {
 }
 
 /* エディタ */
-.editor {
+.editor-container{
   display: flex;
-  flex: 1 1 auto;
+  flex-direction: column;
+  flex: 1 0 0;
   width: 100%;
   height: 100%;
+  padding: 8px;
+  gap: 8px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 #mq-editable-field {
+  flex: 1 0 0;
   width: 100%;
-  height: 100%;
-  padding: 15px;
+  padding: 8px;
+  background-color: #ffffff;
+  border: 2px solid #6557d2;
   color: #444444;
   font-size: 22px;
-  border: none;
   box-shadow: none;
   box-sizing: border-box;
   overflow: auto;
@@ -317,6 +321,18 @@ textarea {
   min-width: 100%;
   width: auto !important;
   overflow: auto;
+}
+
+.latex-input{
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 8px;
+  outline: none;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  color: #424242;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 /* マスク */
