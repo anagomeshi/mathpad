@@ -150,7 +150,7 @@ textarea {
   flex-direction: row;
   width: 100%;
   height: 36px;
-  padding: 1px 0 6px 0;
+  padding: 2px 0 7px 0;
   overflow-x: auto;
   box-sizing: border-box;
 }
@@ -161,7 +161,7 @@ textarea {
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 0 10px;
+  padding: 0 8px;
   background-color: transparent;
   font-size: 14px;
   line-height: 1;
@@ -171,6 +171,7 @@ textarea {
 }
 
 .ribbon-tab-label {
+  margin: 0 2px;
   color: #424242;
   font-weight: 400;
   white-space: nowrap;
@@ -188,11 +189,11 @@ textarea {
 .ribbon-tab-border-container{
   position: absolute;
   bottom: 0;
-  left: 10px;
-  width: calc(100% - 20px);
+  left: 8px;
+  width: calc(100% - 16px);
   height: 2px;
   background-color: transparent;
-  border-radius: 2px;
+  border-radius: 10000px;
   box-sizing: border-box;
 }
 
@@ -236,7 +237,7 @@ textarea {
   display: flex;
   height: 100%;
   padding: 0 4px 0 8px;
-  border-right: 1px solid #cccccc;
+  border-right: 1px solid #c8c6c4;
   box-sizing: border-box;
 }
 
@@ -263,7 +264,7 @@ textarea {
 }
 
 .ribbon-content-tool-button:hover {
-  background-color: #e9eaeb;
+  background-color: #f5f5f5;
 }
 
 .ribbon-content-tool-button.normal {
@@ -292,23 +293,25 @@ textarea {
 
 /* エディタ */
 .editor-container{
-  display: flex;
-  flex-direction: column;
   flex: 1 0 0;
   width: 100%;
   height: 100%;
-  padding: 8px;
-  gap: 8px;
+  padding: 19px 113px 0 113px;
   overflow: hidden;
   box-sizing: border-box;
 }
 
 #mq-editable-field {
-  flex: 1 0 0;
   width: 100%;
-  padding: 8px;
+  height: 100%;
+  padding: 16px;
   background-color: #ffffff;
-  border: 2px solid #6557d2;
+  border-top: 1px solid #d1d1d1;
+  border-right: 1px solid #d1d1d1;
+  border-bottom: none;
+  border-left: 1px solid #d1d1d1;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   color: #444444;
   font-size: 22px;
   box-shadow: none;
@@ -323,15 +326,25 @@ textarea {
   overflow: auto;
 }
 
-.latex-input{
+/* フッター */
+.footer{
+  display: flex;
   flex: 0 0 auto;
   width: 100%;
-  padding: 8px;
+  height: 35px;
+  padding: 0 12px;
+  border-top: 1px solid #e1dfdd;
+  box-sizing: border-box;
+}
+
+.latex-input{
+  width: 100%;
+  height: 100%;
   outline: none;
-  border: 1px solid #d1d1d1;
-  border-radius: 4px;
+  border: none;
+  background-color: transparent;
   color: #424242;
-  font-size: 14px;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
