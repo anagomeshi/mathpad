@@ -180,8 +180,8 @@
   display: inline-block;
 }
 .mq-math-mode .mq-supsub {
-  font-size: 90%;
-  vertical-align: -0.5em;
+  font-size: 75%;
+  vertical-align: -0.4em;
 }
 .mq-math-mode .mq-supsub.mq-limit {
   font-size: 80%;
