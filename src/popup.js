@@ -1,12 +1,12 @@
 const appMask = document.querySelector('.app-mask');
 const copyButton = document.querySelector('.copy-button');
-const contextMenu = document.querySelector('.context-menu');
+const popup = document.querySelector('.popup');
 
-appMask.addEventListener('click', toggleContextMenu);
-copyButton.addEventListener('click', toggleContextMenu);
+appMask.addEventListener('click', togglePopup);
+copyButton.addEventListener('click', togglePopup);
 
-function toggleContextMenu(){
+function togglePopup(){
   appMask.classList.toggle('app-mask-active');
   copyButton.classList.toggle('copy-button-active');
-  contextMenu.classList.toggle('context-menu-show');
+  popup.classList.toggle('popup-show');
 }
