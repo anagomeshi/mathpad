@@ -535,41 +535,10 @@
       </ul>
     </div>
   </div>
-
-  <script type="text/javascript" src="src/ribbon-tab.js"></script>
-  <script type="text/javascript" src="src/context-menu.js"></script>
-  <script type="text/javascript">
-    const MQ = MathQuill.getInterface(2);
-    const MqEditableField = document.getElementById('mq-editable-field');
-    const RibbonContentToolButtons = document.querySelectorAll('.ribbon-content-tool-button');
-    const MqMathEditor = MQ.MathField(MqEditableField);
-
-    RibbonContentToolButtons.forEach(RibbonContentToolButton => {
-      const latex = RibbonContentToolButton.getAttribute('data-latex');
-      const MqStaticField = MQ.StaticMath(RibbonContentToolButton);
-      MqStaticField.latex(latex);
-      RibbonContentToolButton.addEventListener('click', insertFormula);
-    });
-
-    function insertFormula(e) {
-      let formula = e.target.closest('.ribbon-content-tool-button').getAttribute('data-latex').replace(/⬚/g, '');
-      if (formula === '\\frac{}{}') {
-        MqMathEditor.cmd('\\frac');
-      } else if (formula === '\\sqrt{}') {
-        MqMathEditor.cmd('\\sqrt');
-      } else if (formula === '\\sqrt[]{}') {
-        MqMathEditor.cmd('\\nthroot');
-      } else if (formula === '^') {
-        MqMathEditor.cmd('^');
-      } else if (formula === '_') {
-        MqMathEditor.cmd('_');
-      } else {
-        MqMathEditor.write(formula);
-      }
-      MqMathEditor.focus();
-    }
-  </script>
-
+  
+  <script type="text/javascript" src="src/editor.js"></script>
+  <script type="text/javascript" src="src/popup.js"></script>
+  <script type="text/javascript" src="src/ribbon.js"></script>
 </body>
 
 </html>
