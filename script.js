@@ -33,8 +33,6 @@ function setupMathField(element){
 
                             currentLineEditor.remove();
                         }else if(nextLineEditor){
-                            console.log(nextLineEditor);
-
                             const nextField = nextLineEditor.querySelector('.editable-field');
                             if(nextField && nextField.mathFieldInstance){
                                 nextField.mathFieldInstance.focus();
