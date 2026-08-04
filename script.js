@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
+function isMobileDevice(){
+    return /Mobi|Android|iPhone|iPad|Macintosh/i.test(navigator.userAgent) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+}
+
 function setupMathField(element){
     const mathField = MQ.MathField(element, {
         handlers: {
@@ -16,31 +20,31 @@ function setupMathField(element){
             },
 
             deleteOutOf: function(dir, field){
-                if(dir === MQ.L){
-                    if(field.latex() === ""){
-                        const currentLineEditor = element.closest('.line-editor');
+                if(dir === MQ.L && field.latex() === ""){
+                    const currentLineEditor = element.closest('.line-editor');
 
-                        const prevLineEditor = currentLineEditor.previousElementSibling;
+                    const prevLineEditor = currentLineEditor.previousElementSibling;
 
-                        const nextLineEditor = currentLineEditor.nextElementSibling;
+                    const nextLineEditor = currentLineEditor.nextElementSibling;
 
-                        if(prevLineEditor){
-                            const prevField = prevLineEditor.querySelector('.editable-field');
-                            if(prevField && prevField.mathFieldInstance){
-                                prevField.mathFieldInstance.focus();
-                                prevField.mathFieldInstance.moveToDirEnd(MQ.R);
-                            }
-
-                            currentLineEditor.remove();
-                        }else if(nextLineEditor){
-                            const nextField = nextLineEditor.querySelector('.editable-field');
-                            if(nextField && nextField.mathFieldInstance){
-                                nextField.mathFieldInstance.focus();
-                                nextField.mathFieldInstance.moveToDirEnd(MQ.R);
-                            }
-
-                            currentLineEditor.remove();
+                    if(prevLineEditor){
+                        const prevField = prevLineEditor.querySelector('.editable-field');
+                        if(prevField && prevField.mathFieldInstance){
+                            prevField.mathFieldInstance.focus();
+                            prevField.mathFieldInstance.moveToDirEnd(MQ.R);
                         }
+
+                        currentLineEditor.remove();
+                    }
+
+                    else if(nextLineEditor){
+                        const nextField = nextLineEditor.querySelector('.editable-field');
+                        if(nextField && nextField.mathFieldInstance){
+                            nextField.mathFieldInstance.focus();
+                            nextField.mathFieldInstance.moveToDirEnd(MQ.R);
+                        }
+
+                        currentLineEditor.remove();
                     }
                 }
             },
@@ -76,6 +80,15 @@ function setupMathField(element){
     });
 
     element.mathFieldInstance = mathField;
+
+    const hiddenTextArea = element.querySelector('textarea');
+    if(hiddenTextArea){
+        if(isMobileDevice()){
+            hiddenTextArea.setAttribute('inputmode', 'none');
+        }else{
+            hiddenTextArea.setAttribute('inputmode', 'text');
+        }
+    }
 }
 
 function setupCopyButton(lineEditor){
@@ -126,6 +139,62 @@ function createNewLineAndFocus(currentField){
 
     newEditableField.mathFieldInstance.focus();
 }
+
+function getFocusedMathField(){
+    const focusedLine = document.querySelector('.line-editor:focus-within');
+
+    if(focusedLine){
+        const editorElement = focusedLine.querySelector('.editable-field');
+        return editorElement ? editorElement.mathFieldInstance : null;
+    }
+    return null;
+}
+
+document.querySelector('.keyboard').addEventListener('pointerdown', function(e){
+    e.preventDefault();
+});
+
+document.querySelectorAll('.keyboard-button').forEach(function(divBtn){
+    divBtn.addEventListener('pointerdown', function(e){
+        e.preventDefault();
+
+        const focusedLine = getFocusedMathField();
+        if(!focusedLine) return;
+
+        if(divBtn.classList.contains('font-input')){
+            const val = divBtn.getAttribute('data-value');
+            focusedLine.typedText(val);
+        }
+
+        else if(divBtn.classList.contains('cmd-input')){
+            const cmd = divBtn.getAttribute('data-cmd');
+            focusedLine.cmd(cmd);
+        }
+
+        else if(divBtn.classList.contains('symbol-input')){
+            const symbol = divBtn.getAttribute('data-symbol');
+            focusedLine.write(symbol);
+        }
+
+        else if(divBtn.classList.contains('stroke-input')){
+            const key = divBtn.getAttribute('data-key');
+
+            if(key === 'Enter'){
+                const editorElement = document.querySelector('.line-editor:focus-within .editable-field');
+                const isTypingLatex = editorElement ? editorElement.querySelector('.mq-latex-command-input') !== null : false;
+
+                if(isTypingLatex){
+                    focusedLine.keystroke('Enter');
+                }else{
+                    if(focusedLine.latex() !== "") createNewLineAndFocus(focusedLine);
+                }
+            }
+            else{
+                focusedLine.keystroke(key);
+            }
+        }
+    });
+});
 
 // const ribbonContentToolButtons = document.querySelectorAll('.ribbon-content-tool-button');
 // const ribbonTabs = document.querySelectorAll('.ribbon-tab');
