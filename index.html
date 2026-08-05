@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mathpad</title>
     <link rel="stylesheet"href="./style.css" type="text/css" />
     <link rel="stylesheet" href="lib/mathquill.css" />
@@ -681,60 +681,125 @@
             </div>
         </div>
         <div class="keyboard">
-            <div class="keyboard-switcher"></div>
-            <div class="key-panel">
-                <div class="key-panel-row">
-                    <div class="keyboard-button font-input" data-value="q">q</div>
-                    <div class="keyboard-button font-input" data-value="w">w</div>
-                    <div class="keyboard-button font-input" data-value="e">e</div>
-                    <div class="keyboard-button font-input" data-value="r">r</div>
-                    <div class="keyboard-button font-input" data-value="t">t</div>
-                    <div class="keyboard-button font-input" data-value="y">y</div>
-                    <div class="keyboard-button font-input" data-value="u">u</div>
-                    <div class="keyboard-button font-input" data-value="i">i</div>
-                    <div class="keyboard-button font-input" data-value="o">o</div>
-                    <div class="keyboard-button font-input" data-value="p">p</div>
+            <div class="keyboard-switcher">
+                <div class="switcher-tab-container">
+                    <button class="switcher-tab selected" data-tab="basic">123</button>
+                    <button class="switcher-tab" data-tab="abc">ABC</button>
                 </div>
-                <div class="key-panel-row">
-                    <div class="keyboard-button font-input" data-value="a">a</div>
-                    <div class="keyboard-button font-input" data-value="s">s</div>
-                    <div class="keyboard-button font-input" data-value="d">d</div>
-                    <div class="keyboard-button font-input" data-value="f">f</div>
-                    <div class="keyboard-button font-input" data-value="g">g</div>
-                    <div class="keyboard-button font-input" data-value="h">h</div>
-                    <div class="keyboard-button font-input" data-value="j">j</div>
-                    <div class="keyboard-button font-input" data-value="k">k</div>
-                    <div class="keyboard-button font-input" data-value="l">l</div>
-                </div>
-                <div class="key-panel-row">
-                    <div class="keyboard-button stretch system"></div>
-                    <div class="keyboard-margin"></div>
-                    <div class="keyboard-button font-input" data-value="z">z</div>
-                    <div class="keyboard-button font-input" data-value="x">x</div>
-                    <div class="keyboard-button font-input" data-value="c">c</div>
-                    <div class="keyboard-button font-input" data-value="v">v</div>
-                    <div class="keyboard-button font-input" data-value="b">b</div>
-                    <div class="keyboard-button font-input" data-value="n">n</div>
-                    <div class="keyboard-button font-input" data-value="m">m</div>
-                    <div class="keyboard-margin"></div>
-                    <div class="keyboard-button stretch system stroke-input" data-key="Backspace">
-                        <img src="./imgs/backspace.svg" alt="backspece" draggable="false">
+            </div>
+            <div class="key-panel-container">
+                <div class="key-panel showed" data-panel="basic">
+                    <div class="key-panel-row">
+                        <div class="keyboard-button font-input" data-value="x" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="y" role="button"></div>
+                        <div class="keyboard-button stretch symbol-input" data-symbol="\pi" role="button"></div>
+                        <div class="keyboard-button stretch font-input" data-value="e" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button font-input" data-value="7" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="8" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="9" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\times" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\div" role="button"></div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button cmd-input" data-cmd="⬚^2" role="button"></div>
+                        <div class="keyboard-button cmd-input" data-cmd="⬚^⬚" role="button"></div>
+                        <div class="keyboard-button stretch cmd-input" data-cmd="\sqrt{⬚}" role="button"></div>
+                        <div class="keyboard-button stretch cmd-input" data-cmd="\sqrt[⬚]{⬚}" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button font-input" data-value="4" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="5" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="6" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="+" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="-" role="button"></div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button font-input" data-value="/" role="button"></div>
+                        <div class="keyboard-button cmd-input" data-cmd="⬚_⬚" role="button"></div>
+                        <div class="keyboard-button stretch cmd-input" data-cmd="\sqrt{⬚}" role="button"></div>
+                        <div class="keyboard-button stretch cmd-input" data-cmd="\sqrt[⬚]{⬚}" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button font-input" data-value="1" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="2" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="3" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="=" role="button"></div>
+                        <div class="keyboard-button system stroke-input" data-key="Backspace" role="button">
+                            <img src="./imgs/backspace.svg" alt="backspece" draggable="false">
+                        </div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button cmd-input" data-cmd="⬚^2" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="," role="button"></div>
+                        <div class="keyboard-button stretch font-input" data-value="(" role="button"></div>
+                        <div class="keyboard-button stretch font-input" data-value=")" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button font-input" data-value="0" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="." role="button"></div>
+                        <div class="keyboard-button system stroke-input" data-key="Left" role="button">
+                            <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Right" role="button">
+                            <img src="./imgs/chevron-right.svg" alt="arrow-right" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Enter" role="button">
+                            <img src="./imgs/arrow-enter.svg" alt="enter" draggable="false">
+                        </div>
                     </div>
                 </div>
-                <div class="key-panel-row">
-                    <div class="keyboard-button system">αβγ</div>
-                    <div class="keyboard-button font-input" data-value="\">\</div>
-                    <div class="keyboard-button font-input" data-value="(">(</div>
-                    <div class="keyboard-button font-input" data-value=")">)</div>
-                    <div class="keyboard-button stretch font-input" data-value=" "></div>
-                    <div class="keyboard-button system stroke-input" data-key="Left">
-                        <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
+                <div class="key-panel" data-panel="abc">
+                    <div class="key-panel-row">
+                        <div class="keyboard-button font-input" data-value="q" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="w" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="e" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="r" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="t" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="y" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="u" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="i" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="o" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="p" role="button"></div>
                     </div>
-                    <div class="keyboard-button system stroke-input" data-key="Right">
-                        <img src="./imgs/chevron-right.svg" alt="arrow-right" draggable="false">
+                    <div class="key-panel-row">
+                        <div class="keyboard-button font-input" data-value="a" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="s" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="d" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="f" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="g" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="h" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="j" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="k" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="l" role="button"></div>
                     </div>
-                    <div class="keyboard-button system stroke-input" data-key="Enter">
-                        <img src="./imgs/arrow-enter.svg" alt="backspece" draggable="false">
+                    <div class="key-panel-row">
+                        <div class="keyboard-button stretch system" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button font-input" data-value="z" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="x" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="c" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="v" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="b" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="n" role="button"></div>
+                        <div class="keyboard-button font-input" data-value="m" role="button"></div>
+                        <div class="keyboard-margin"></div>
+                        <div class="keyboard-button stretch system stroke-input" data-key="Backspace" role="button">
+                            <img src="./imgs/backspace.svg" alt="backspece" draggable="false">
+                        </div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button system" role="button">αβγ</div>
+                        <div class="keyboard-button font-input" data-value="\" role="button">\</div>
+                        <div class="keyboard-button font-input" data-value="(" role="button">(</div>
+                        <div class="keyboard-button font-input" data-value=")" role="button">)</div>
+                        <div class="keyboard-button stretch font-input" data-value=" " role="button"></div>
+                        <div class="keyboard-button system stroke-input" data-key="Left" role="button">
+                            <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Right" role="button">
+                            <img src="./imgs/chevron-right.svg" alt="arrow-right" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Enter" role="button">
+                            <img src="./imgs/arrow-enter.svg" alt="enter" draggable="false">
+                        </div>
                     </div>
                 </div>
             </div>
