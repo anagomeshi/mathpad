@@ -21,6 +21,7 @@ html,body {
 *, *::before, *::after {
     box-sizing: border-box;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 input,textarea {
@@ -292,10 +293,9 @@ input,textarea {
     border-bottom: 1px solid #6557d2 !important;
 }
 
-.mq-root-block {
+.editable-field .mq-root-block {
     min-width: 100%;
     width: auto !important;
-    overflow: auto;
 }
 
 .copy-button{
@@ -342,19 +342,64 @@ input,textarea {
 
 .keyboard-switcher{
     display: flex;
-    flex: 0 0 auto;
+    justify-content: center;
     width: 100%;
     height: 40px;
 }
 
-.key-panel{
+.switcher-tab-container{
     display: flex;
+    gap: 8px;
+    max-width: 750px;
+    width: 100%;
+    padding: 4px 8px;
+}
+
+.switcher-tab{
+    position: relative;
+    padding: 0 8px;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #444444;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.switcher-tab::after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 2.5px;
+    background-color: transparent;
+    border-radius: 2.5px;
+}
+
+.switcher-tab:hover::after{
+    background-color: #c7c7c7;
+}
+
+.switcher-tab.selected::after{
+    background-color: #6557d2;
+}
+
+.key-panel-container{
+    width: 100%;
+}
+
+.key-panel{
+    display: none;
     flex-direction: column;
     align-items: center;
-    flex: 0 0 auto;
     width: 100%;
-    height: 100%;
     padding-bottom: 8px;
+}
+
+.key-panel.showed{
+    display: flex;
 }
 
 .key-panel-row{
@@ -366,7 +411,7 @@ input,textarea {
 }
 
 .keyboard-button{
-    display: flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
@@ -375,24 +420,32 @@ input,textarea {
     margin: 2px;
     background-color: #ffffff;
     border-radius: 8px;
-    font-size: 1.2rem;
-    cursor: pointer;
+    font-size: 1.2rem !important;
+    cursor: pointer !important;
+}
+
+.keyboard-button *{
+    pointer-events: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+.keyboard-button .mq-root-block{
+    width: auto !important;
 }
 
 .keyboard-button img{
     width: 1.6rem;
     height: 1.6rem;
-    pointer-events: none;
     -webkit-touch-callout: none;
-}
-
-.keyboard-button.stretch{
-    flex: 1 0 0;
 }
 
 .keyboard-button.system{
     background-color: #dcdfe0;
     font-size: 1rem;
+}
+
+.keyboard-button.stretch, .keyboard-margin.stretch{
+    flex: 1 0 0;
 }
 
 .keyboard-margin{
