@@ -1,5 +1,6 @@
 const MQ = MathQuill.getInterface(2);
 
+// DOMのロードが完了したら、htmlにべた書きされてる行に対して初期化処理を行う
 document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('.editable-field').forEach(function(editorElement) {
         setupMathField(editorElement);
@@ -7,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
-function isMobileDevice(){
-    return /Mobi|Android|iPhone|iPad|Macintosh/i.test(navigator.userAgent) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-}
-
+// 数式入力部（editable-field）のセットアップ ハンドラの詳述↓
+// enter：エンター入力で新行作成、フォーカス移動
+// deleteOutOf：空行でのバックスペース入力で現在の行削除、下に行があれば下の行へ、なければ上の行へフォーカス移動
+// upOutOf, downOutOf：上/下矢印キーでフォーカス移動
 function setupMathField(element){
     const mathField = MQ.MathField(element, {
         handlers: {
@@ -91,6 +92,7 @@ function setupMathField(element){
     }
 }
 
+// 各コピーボタンに対して対象となるeditable-fieldを紐づけする
 function setupCopyButton(lineEditor){
     const copyButton = lineEditor.querySelector('.copy-button');
     const editorElement = lineEditor.querySelector('.editable-field');
@@ -107,6 +109,7 @@ function setupCopyButton(lineEditor){
     });
 }
 
+// 現在の行の下へ新行を作成
 function createNewLineAndFocus(currentField){
     const newLineEditor = document.createElement('div');
     newLineEditor.className = 'line-editor';
@@ -140,6 +143,7 @@ function createNewLineAndFocus(currentField){
     newEditableField.mathFieldInstance.focus();
 }
 
+// 現在フォーカス中の行を取得
 function getFocusedMathField(){
     const focusedLine = document.querySelector('.line-editor:focus-within');
 
@@ -150,34 +154,97 @@ function getFocusedMathField(){
     return null;
 }
 
+// ユーザーの使用デバイスの種類をチェック
+function isMobileDevice(){
+    return /Mobi|Android|iPhone|iPad|Macintosh/i.test(navigator.userAgent) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+}
+
+// 仮想キーボード
 document.querySelector('.keyboard').addEventListener('pointerdown', function(e){
     e.preventDefault();
 });
 
-document.querySelectorAll('.keyboard-button').forEach(function(divBtn){
-    divBtn.addEventListener('pointerdown', function(e){
+document.querySelectorAll('.switcher-tab').forEach(function(tab){
+    tab.addEventListener('click', function(e){
+        e.preventDefault();
+        
+        const dataTab = tab.getAttribute('data-tab');
+
+        const selectedTab = document.querySelector('.selected');
+        const showedKeyboardPanel = document.querySelector('.showed');
+        const targetKeyboardPanel = document.querySelector(`[data-panel=${dataTab}]`);
+
+        selectedTab.classList.remove('selected');
+        tab.classList.add('selected');
+
+        showedKeyboardPanel.classList.remove('showed');
+        targetKeyboardPanel.classList.add('showed');
+    });
+});
+
+document.querySelectorAll('.keyboard-button').forEach(function(btn){
+    if(btn.classList.contains('font-input')){
+        const text = btn.getAttribute('data-value');
+
+        btn.textContent = text;
+    }
+
+    else if(btn.classList.contains('cmd-input')){
+        const latexText = btn.getAttribute('data-cmd');
+
+        const MqStaticField = MQ.StaticMath(btn);
+        MqStaticField.latex(latexText);
+    }
+
+    else if(btn.classList.contains('symbol-input')){
+        const latexText = btn.getAttribute('data-symbol');
+
+        const MqStaticField = MQ.StaticMath(btn);
+        MqStaticField.latex(latexText);
+    }
+
+    btn.addEventListener('pointerdown', function(e){
         e.preventDefault();
 
         const focusedLine = getFocusedMathField();
         if(!focusedLine) return;
 
-        if(divBtn.classList.contains('font-input')){
-            const val = divBtn.getAttribute('data-value');
+        if(btn.classList.contains('font-input')){
+            const val = btn.getAttribute('data-value');
             focusedLine.typedText(val);
         }
 
-        else if(divBtn.classList.contains('cmd-input')){
-            const cmd = divBtn.getAttribute('data-cmd');
-            focusedLine.cmd(cmd);
+        else if(btn.classList.contains('cmd-input')){
+            const cmd = btn.getAttribute('data-cmd').replace(/⬚/g, '');
+
+            switch(cmd){
+                case '\\frac{}{}':
+                    focusedLine.cmd('\\frac');
+                    break;
+                case '\\sqrt{}':
+                    focusedLine.cmd('\\sqrt');
+                    break;
+                case '\\sqrt[]{}':
+                    focusedLine.cmd('\\nthroot');
+                    break;
+                case '^':
+                    focusedLine.cmd('^');
+                    break;
+                case '_':
+                    focusedLine.cmd('_');
+                    break;
+                default:
+                    focusedLine.write(cmd);
+            }
         }
 
-        else if(divBtn.classList.contains('symbol-input')){
-            const symbol = divBtn.getAttribute('data-symbol');
+        else if(btn.classList.contains('symbol-input')){
+            const symbol = btn.getAttribute('data-symbol');
             focusedLine.write(symbol);
         }
 
-        else if(divBtn.classList.contains('stroke-input')){
-            const key = divBtn.getAttribute('data-key');
+        else if(btn.classList.contains('stroke-input')){
+            const key = btn.getAttribute('data-key');
 
             if(key === 'Enter'){
                 const editorElement = document.querySelector('.line-editor:focus-within .editable-field');
@@ -195,58 +262,3 @@ document.querySelectorAll('.keyboard-button').forEach(function(divBtn){
         }
     });
 });
-
-// const ribbonContentToolButtons = document.querySelectorAll('.ribbon-content-tool-button');
-// const ribbonTabs = document.querySelectorAll('.ribbon-tab');
-
-// リボン
-// for (i = 0; i < ribbonTabs.length; i++) {
-//     ribbonTabs[i].addEventListener('click', changeTabContent);
-// }
-
-// function changeTabContent() {
-//     const selectedTab = document.querySelector('.selected');
-//     const targetTab = event.target.closest('.ribbon-tab');
-//     const targetDataTab = targetTab.getAttribute('data-tab');
-//     const showRibbonContent = document.querySelector('.show');
-//     const targetRibbonContent = document.getElementById(targetDataTab);
-
-//     selectedTab.classList.remove('selected');
-//     targetTab.classList.add('selected');
-
-//     showRibbonContent.classList.remove('show');
-//     targetRibbonContent.classList.add('show');
-// }
-
-// ribbonContentToolButtons.forEach(ribbonContentToolButton => {
-//     const latex = ribbonContentToolButton.getAttribute('data-latex');
-//     const MqStaticField = MQ.StaticMath(ribbonContentToolButton);
-//     MqStaticField.latex(latex);
-//     ribbonContentToolButton.addEventListener('click', insertFormula);
-// });
-
-// function insertFormula(e) {
-//     let formula = e.target.closest('.ribbon-content-tool-button').getAttribute('data-latex').replace(/⬚/g, '');
-
-//     switch (formula) {
-//         case '\\frac{}{}':
-//             MqMathEditor.cmd('\\frac');
-//             break;
-//         case '\\sqrt{}':
-//             MqMathEditor.cmd('\\sqrt');
-//             break;
-//         case '\\sqrt[]{}':
-//             MqMathEditor.cmd('\\nthroot');
-//             break;
-//         case '^':
-//             MqMathEditor.cmd('^');
-//             break;
-//         case '_':
-//             MqMathEditor.cmd('_');
-//             break;
-//         default:
-//             MqMathEditor.write(formula);
-//     }
-
-//     MqMathEditor.focus();
-// }
