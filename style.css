@@ -7,7 +7,6 @@ html,body {
     color: #444444;
     font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
     overflow: hidden;
-    box-sizing: border-box;
 }
 
 @supports(padding: env(safe-area-inset-left)) {
@@ -19,8 +18,9 @@ html,body {
     }
 }
 
-div,a,button,span{
+*, *::before, *::after {
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 input,textarea {
@@ -86,6 +86,7 @@ input,textarea {
 .header img{
     width: 1.5rem;
     height: 1.5rem;
+    -webkit-touch-callout: none;
 }
 
 .brand {
@@ -324,6 +325,7 @@ input,textarea {
 .copy-button img{
     width: 1.5rem;
     height: 1.5rem;
+    -webkit-touch-callout: none;
 }
 
 /* キーボード */
@@ -375,13 +377,13 @@ input,textarea {
     border-radius: 8px;
     font-size: 1.2rem;
     cursor: pointer;
-    touch-action: manipulation;
 }
 
 .keyboard-button img{
     width: 1.6rem;
     height: 1.6rem;
     pointer-events: none;
+    -webkit-touch-callout: none;
 }
 
 .keyboard-button.stretch{
