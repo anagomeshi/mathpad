@@ -433,12 +433,10 @@ input,textarea {
     border-radius: 8px;
     font-size: 1.2rem;
     cursor: pointer !important;
-    touch-action: manipulation !important;
 }
 
-
 .keyboard-button *{
-    pointer-events: none !important;
+    /* pointer-events: none !important; */
     -webkit-user-select: none !important;
     user-select: none !important;
 }
