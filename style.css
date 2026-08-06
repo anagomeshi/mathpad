@@ -277,7 +277,10 @@ input,textarea {
     width: 100%;
     height: 100%;
     padding: 1rem 3rem 1rem 0;
-    border: none !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-left: none !important;
+    border-bottom: 2px solid #d8d8d8 !important;
     border-radius: 0;
     outline: none;
     color: #444444;
@@ -287,19 +290,8 @@ input,textarea {
     white-space: nowrap;
 }
 
-.editable-field::after{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: #d8d8d8;
-    border-radius: 1.5px;
-}
-
-.editable-field:focus-within::after{
-    background-color: #6557d2;
+.editable-field:focus-within{
+    border-bottom: 2px solid #6557d2 !important;
 }
 
 .editable-field .mq-root-block {
@@ -422,26 +414,30 @@ input,textarea {
 
 .keyboard-button{
     position: relative;
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
     width: calc((100% - 4px * 10) / 10);
     height: 40px;
+    padding: 0;
     margin: 2px;
     background-color: #ffffff;
+    border: none;
+    outline: none;
     border-radius: 8px;
+    color: #444444;
     font-size: 1.2rem;
     cursor: pointer !important;
 }
 
 .keyboard-button *{
-    /* pointer-events: none !important; */
+    pointer-events: none !important;
     -webkit-user-select: none !important;
     user-select: none !important;
 }
 .keyboard-button .mq-root-block{
-    width: fit-content !important;
+    width: auto !important;
     font-size: 1.2rem !important;
 }
 
