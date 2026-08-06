@@ -165,7 +165,7 @@ document.querySelector('.keyboard').addEventListener('pointerdown', function(e){
 });
 
 document.querySelectorAll('.switcher-tab').forEach(function(tab){
-    tab.addEventListener('click', function(e){
+    tab.addEventListener('pointerdown', function(e){
         e.preventDefault();
         
         const dataTab = tab.getAttribute('data-tab');
@@ -232,6 +232,15 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
                     break;
                 case '_':
                     focusedLine.cmd('_');
+                    break;
+                case '||':
+                    focusedLine.cmd('|');
+                    break;
+                case '\\Sigma':
+                    focusedLine.cmd('\\sum');
+                    break;
+                case '\\Pi':
+                    focusedLine.cmd('\\prod');
                     break;
                 default:
                     focusedLine.write(cmd);
