@@ -206,8 +206,6 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
     btn.addEventListener('pointerdown', function(e){
         e.preventDefault();
 
-        btn.classList.add('depressed');
-
         const focusedLine = getFocusedMathField();
         if(!focusedLine) return;
 
@@ -272,14 +270,6 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
             }
         }
     });
-
-    btn.addEventListener('pointerup', function(e){
-        btn.classList.remove('depressed');
-    };
-
-    btn.addEventListener('pointercancel', function(e){
-        btn.classList.remove('depressed');
-    };
 
     // Safariのダブルタップ拡大を防ぐ
     btn.addEventListener('touchend', function(e){
