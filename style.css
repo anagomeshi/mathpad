@@ -456,6 +456,10 @@ input,textarea {
     font-size: 1rem;
 }
 
+.keyboard-button.system:active{
+    background-color: #cbd1d4;
+}
+
 .keyboard-button.stretch, .keyboard-margin.stretch{
     flex: 1 0 0;
 }
