@@ -431,6 +431,10 @@ input,textarea {
     cursor: pointer !important;
 }
 
+.keyboard-button:active{
+    background-color: #eef1f3;
+}
+
 .keyboard-button *{
     pointer-events: none !important;
     -webkit-user-select: none !important;
