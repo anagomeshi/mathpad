@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll('.editable-field').forEach(function(editorElement) {
         setupMathField(editorElement);
         setupCopyButton(editorElement.closest('.line-editor'));
+
+        editorElement.mathFieldInstance.focus();
+
+        loadKeyboardButton();
     });
 });
 
@@ -159,11 +163,44 @@ function isMobileDevice(){
     return /Mobi|Android|iPhone|iPad|Macintosh/i.test(navigator.userAgent) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 }
 
-// 仮想キーボード
+// 初期化されていないキーボードのボタン（主にMathQuillのStaticMath）を初期化
+// 初期化済みのボタンにはinitializedクラスを付与
+function loadKeyboardButton(){
+    const showedKeyboardPanel = document.querySelector('.showed');
+
+    showedKeyboardPanel.querySelectorAll('.keyboard-button').forEach(function(btn){
+        if(!btn.classList.contains('initialized')){
+            if(btn.classList.contains('font-input')){
+                const text = btn.getAttribute('data-value');
+
+                btn.textContent = text;
+            }
+
+            else if(btn.classList.contains('cmd-input')){
+                const latexText = btn.getAttribute('data-cmd');
+
+                const MqStaticField = MQ.StaticMath(btn);
+                MqStaticField.latex(latexText);
+            }
+
+            else if(btn.classList.contains('symbol-input')){
+                const latexText = btn.getAttribute('data-symbol');
+
+                const MqStaticField = MQ.StaticMath(btn);
+                MqStaticField.latex(latexText);
+            }
+
+            btn.classList.add('initialized');
+        }
+    });
+}
+
+// キーボード全体へのタッチイベントを禁止
 document.querySelector('.keyboard').addEventListener('pointerdown', function(e){
     e.preventDefault();
 });
 
+// キーボードのパネル切り替え処理
 document.querySelectorAll('.switcher-tab').forEach(function(tab){
     tab.addEventListener('pointerdown', function(e){
         e.preventDefault();
@@ -179,30 +216,13 @@ document.querySelectorAll('.switcher-tab').forEach(function(tab){
 
         showedKeyboardPanel.classList.remove('showed');
         targetKeyboardPanel.classList.add('showed');
+
+        loadKeyboardButton();
     });
 });
 
+// キーボードのボタンにクリック属性を付与
 document.querySelectorAll('.keyboard-button').forEach(function(btn){
-    if(btn.classList.contains('font-input')){
-        const text = btn.getAttribute('data-value');
-
-        btn.textContent = text;
-    }
-
-    else if(btn.classList.contains('cmd-input')){
-        const latexText = btn.getAttribute('data-cmd');
-
-        const MqStaticField = MQ.StaticMath(btn);
-        MqStaticField.latex(latexText);
-    }
-
-    else if(btn.classList.contains('symbol-input')){
-        const latexText = btn.getAttribute('data-symbol');
-
-        const MqStaticField = MQ.StaticMath(btn);
-        MqStaticField.latex(latexText);
-    }
-
     btn.addEventListener('pointerdown', function(e){
         e.preventDefault();
 
@@ -250,6 +270,18 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
                     break;
                 case '\\binom{}{}':
                     focusedLine.cmd('\\binom');
+                    break;
+                case '\\lbrace':
+                    focusedLine.cmd('{');
+                    break;
+                case '\\rbrace':
+                    focusedLine.cmd('}');
+                    break;
+                case '⟨':
+                    focusedLine.cmd('\\langle');
+                    break;
+                case '⟩':
+                    focusedLine.cmd('\\rangle');
                     break;
                 default:
                     focusedLine.cmd(cmd);
