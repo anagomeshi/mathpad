@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         editorElement.mathFieldInstance.focus();
 
-        loadKeyboardButton();
+        initializeKeyboardButton();
     });
 });
 
@@ -163,9 +163,9 @@ function isMobileDevice(){
     return /Mobi|Android|iPhone|iPad|Macintosh/i.test(navigator.userAgent) && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 }
 
-// 初期化されていないキーボードのボタン（主にMathQuillのStaticMath）を初期化
+// 初期化されていないキーボードのボタンを初期化（StaticMathの初期化 & touchdownイベントの付与）
 // 初期化済みのボタンにはinitializedクラスを付与
-function loadKeyboardButton(){
+function initializeKeyboardButton(){
     const showedKeyboardPanel = document.querySelector('.showed');
 
     showedKeyboardPanel.querySelectorAll('.keyboard-button').forEach(function(btn){
@@ -189,6 +189,100 @@ function loadKeyboardButton(){
                 const MqStaticField = MQ.StaticMath(btn);
                 MqStaticField.latex(latexText);
             }
+
+            btn.addEventListener('pointerdown', function(e){
+                e.preventDefault();
+
+                const focusedLine = getFocusedMathField();
+                if(!focusedLine) return;
+
+                if(btn.classList.contains('font-input')){
+                    const val = btn.getAttribute('data-value');
+                    focusedLine.typedText(val);
+                }
+
+                else if(btn.classList.contains('cmd-input')){
+                    const cmd = btn.getAttribute('data-cmd').replace(/⬚/g, '');
+
+                    switch(cmd){
+                        case '^2':
+                            focusedLine.write('^2');
+                            break;
+                        case '\\sqrt{}':
+                            focusedLine.cmd('\\sqrt');
+                            break;
+                        case '\\sqrt[]{}':
+                            focusedLine.cmd('\\nthroot');
+                            break;
+                        case '\\frac{}{}':
+                            focusedLine.cmd('\\frac');
+                            break;
+                        case '||':
+                            focusedLine.cmd('|');
+                            break;
+                        case '\\Sigma':
+                            focusedLine.cmd('\\sum');
+                            break;
+                        case '\\Pi':
+                            focusedLine.cmd('\\prod');
+                            break;
+                        case '\\vec{}':
+                            focusedLine.cmd('\\vec');
+                            break;
+                        case '\\overline{}':
+                            focusedLine.cmd('\\overline');
+                            break;
+                        case '\\underline{}':
+                            focusedLine.cmd('\\underline');
+                            break;
+                        case '\\binom{}{}':
+                            focusedLine.cmd('\\binom');
+                            break;
+                        case '\\lbrace':
+                            focusedLine.cmd('{');
+                            break;
+                        case '\\rbrace':
+                            focusedLine.cmd('}');
+                            break;
+                        case '⟨':
+                            focusedLine.cmd('\\langle');
+                            break;
+                        case '⟩':
+                            focusedLine.cmd('\\rangle');
+                            break;
+                        default:
+                            focusedLine.cmd(cmd);
+                    }
+                }
+
+                else if(btn.classList.contains('symbol-input')){
+                    const symbol = btn.getAttribute('data-symbol');
+                    focusedLine.write(symbol);
+                }
+
+                else if(btn.classList.contains('stroke-input')){
+                    const key = btn.getAttribute('data-key');
+
+                    if(key === 'Enter'){
+                        const editorElement = document.querySelector('.line-editor:focus-within .editable-field');
+                        const isTypingLatex = editorElement ? editorElement.querySelector('.mq-latex-command-input') !== null : false;
+
+                        if(isTypingLatex){
+                            focusedLine.keystroke('Enter');
+                        }else{
+                            if(focusedLine.latex() !== "") createNewLineAndFocus(focusedLine);
+                        }
+                    }
+                    else{
+                        focusedLine.keystroke(key);
+                    }
+                }
+            });
+
+            // Safariのダブルタップ拡大を防ぐ
+            btn.addEventListener('touchend', function(e){
+                e.preventDefault();
+            }, { passive: false });
 
             btn.classList.add('initialized');
         }
@@ -217,103 +311,6 @@ document.querySelectorAll('.switcher-tab').forEach(function(tab){
         showedKeyboardPanel.classList.remove('showed');
         targetKeyboardPanel.classList.add('showed');
 
-        loadKeyboardButton();
+        initializeKeyboardButton();
     });
-});
-
-// キーボードのボタンにクリック属性を付与
-document.querySelectorAll('.keyboard-button').forEach(function(btn){
-    btn.addEventListener('pointerdown', function(e){
-        e.preventDefault();
-
-        const focusedLine = getFocusedMathField();
-        if(!focusedLine) return;
-
-        if(btn.classList.contains('font-input')){
-            const val = btn.getAttribute('data-value');
-            focusedLine.typedText(val);
-        }
-
-        else if(btn.classList.contains('cmd-input')){
-            const cmd = btn.getAttribute('data-cmd').replace(/⬚/g, '');
-
-            switch(cmd){
-                case '^2':
-                    focusedLine.write('^2');
-                    break;
-                case '\\sqrt{}':
-                    focusedLine.cmd('\\sqrt');
-                    break;
-                case '\\sqrt[]{}':
-                    focusedLine.cmd('\\nthroot');
-                    break;
-                case '\\frac{}{}':
-                    focusedLine.cmd('\\frac');
-                    break;
-                case '||':
-                    focusedLine.cmd('|');
-                    break;
-                case '\\Sigma':
-                    focusedLine.cmd('\\sum');
-                    break;
-                case '\\Pi':
-                    focusedLine.cmd('\\prod');
-                    break;
-                case '\\vec{}':
-                    focusedLine.cmd('\\vec');
-                    break;
-                case '\\overline{}':
-                    focusedLine.cmd('\\overline');
-                    break;
-                case '\\underline{}':
-                    focusedLine.cmd('\\underline');
-                    break;
-                case '\\binom{}{}':
-                    focusedLine.cmd('\\binom');
-                    break;
-                case '\\lbrace':
-                    focusedLine.cmd('{');
-                    break;
-                case '\\rbrace':
-                    focusedLine.cmd('}');
-                    break;
-                case '⟨':
-                    focusedLine.cmd('\\langle');
-                    break;
-                case '⟩':
-                    focusedLine.cmd('\\rangle');
-                    break;
-                default:
-                    focusedLine.cmd(cmd);
-            }
-        }
-
-        else if(btn.classList.contains('symbol-input')){
-            const symbol = btn.getAttribute('data-symbol');
-            focusedLine.write(symbol);
-        }
-
-        else if(btn.classList.contains('stroke-input')){
-            const key = btn.getAttribute('data-key');
-
-            if(key === 'Enter'){
-                const editorElement = document.querySelector('.line-editor:focus-within .editable-field');
-                const isTypingLatex = editorElement ? editorElement.querySelector('.mq-latex-command-input') !== null : false;
-
-                if(isTypingLatex){
-                    focusedLine.keystroke('Enter');
-                }else{
-                    if(focusedLine.latex() !== "") createNewLineAndFocus(focusedLine);
-                }
-            }
-            else{
-                focusedLine.keystroke(key);
-            }
-        }
-    });
-
-    // Safariのダブルタップ拡大を防ぐ
-    btn.addEventListener('touchend', function(e){
-        e.preventDefault();
-    }, { passive: false });
 });
