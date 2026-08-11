@@ -227,12 +227,6 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
                 case '\\sqrt[]{}':
                     focusedLine.cmd('\\nthroot');
                     break;
-                case '^':
-                    focusedLine.cmd('^');
-                    break;
-                case '_':
-                    focusedLine.cmd('_');
-                    break;
                 case '||':
                     focusedLine.cmd('|');
                     break;
@@ -255,7 +249,7 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
                     focusedLine.cmd('\\binom');
                     break;
                 default:
-                    focusedLine.write(cmd);
+                    focusedLine.cmd(cmd);
             }
         }
 
