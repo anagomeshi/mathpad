@@ -218,14 +218,17 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
             const cmd = btn.getAttribute('data-cmd').replace(/⬚/g, '');
 
             switch(cmd){
-                case '\\frac{}{}':
-                    focusedLine.cmd('\\frac');
+                case '^2':
+                    focusedLine.write('^2');
                     break;
                 case '\\sqrt{}':
                     focusedLine.cmd('\\sqrt');
                     break;
                 case '\\sqrt[]{}':
                     focusedLine.cmd('\\nthroot');
+                    break;
+                case '\\frac{}{}':
+                    focusedLine.cmd('\\frac');
                     break;
                 case '||':
                     focusedLine.cmd('|');
