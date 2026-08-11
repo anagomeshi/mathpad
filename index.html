@@ -719,7 +719,7 @@
                     <div class="key-panel-row">
                         <div class="keyboard-button symbol-input" data-symbol="<" role="button"></div>
                         <div class="keyboard-button symbol-input" data-symbol=">" role="button"></div>
-                        <div class="keyboard-button stretch font-input" data-value="/" role="button"></div>
+                        <div class="keyboard-button stretch symbol-input" data-symbol="/" role="button"></div>
                         <div class="keyboard-button stretch cmd-input" data-cmd="\frac{⬚}{⬚}" role="button"></div>
                         <div class="keyboard-margin"></div>
                         <div class="keyboard-button font-input" data-value="1" role="button"></div>
@@ -733,8 +733,8 @@
                     <div class="key-panel-row">
                         <div class="keyboard-button symbol-input" data-symbol="\pm" role="button"></div>
                         <div class="keyboard-button symbol-input" data-symbol="," role="button"></div>
-                        <div class="keyboard-button stretch font-input" data-value="(" role="button"></div>
-                        <div class="keyboard-button stretch font-input" data-value=")" role="button"></div>
+                        <div class="keyboard-button stretch symbol-input" data-symbol="(" role="button"></div>
+                        <div class="keyboard-button stretch symbol-input" data-symbol=")" role="button"></div>
                         <div class="keyboard-margin"></div>
                         <div class="keyboard-button font-input" data-value="0" role="button"></div>
                         <div class="keyboard-button font-input" data-value="." role="button"></div>
@@ -792,9 +792,9 @@
                     </div>
                     <div class="key-panel-row">
                         <div class="keyboard-button system" role="button">αβγ</div>
-                        <div class="keyboard-button font-input" data-value="\" role="button">\</div>
-                        <div class="keyboard-button font-input" data-value="(" role="button">(</div>
-                        <div class="keyboard-button font-input" data-value=")" role="button">)</div>
+                        <div class="keyboard-button symbol-input" data-symbol="\" role="button">\</div>
+                        <div class="keyboard-button symbol-input" data-symbol="(" role="button">(</div>
+                        <div class="keyboard-button symbol-input" data-symbol=")" role="button">)</div>
                         <div class="keyboard-button stretch font-input" data-value=" " role="button"></div>
                         <div class="keyboard-button system stroke-input" data-key="Left" role="button">
                             <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
@@ -904,6 +904,64 @@
                         <div class="keyboard-button symbol-input" data-symbol="\le" role="button"></div>
                         <div class="keyboard-button symbol-input" data-symbol="\ge" role="button"></div>
                         <div class="keyboard-button symbol-input" data-symbol="\neq" role="button"></div>
+                        <div class="keyboard-button system stroke-input" data-key="Left" role="button">
+                            <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Right" role="button">
+                            <img src="./imgs/chevron-right.svg" alt="arrow-right" draggable="false">
+                        </div>
+                        <div class="keyboard-button system stroke-input" data-key="Enter" role="button">
+                            <img src="./imgs/arrow-enter.svg" alt="enter" draggable="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="key-panel" data-panel="dec">
+                    <div class="key-panel-row">
+                        <div class="keyboard-button cmd-input" data-cmd="\vec{⬚}" role="button"></div>
+                        <div class="keyboard-button cmd-input" data-cmd="\overline{⬚}" role="button"></div>
+                        <div class="keyboard-button cmd-input" data-cmd="\underline{⬚}" role="button"></div>
+                        <div class="keyboard-button cmd-input" data-cmd="\binom{⬚}{⬚}" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\lfloor" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="rfloor" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\lceil" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\rceil" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="[" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="]" role="button"></div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button symbol-input" data-symbol="{" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="}" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\langle" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\rangle" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="|" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\angle" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\triangle" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\square" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\parallel" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\cong" role="button"></div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button symbol-input" data-symbol="\ll" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\gg" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol=":" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\hbar" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\aleph" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\bullet" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\circ" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\star" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\nabla" role="button"></div>
+                        <div class="keyboard-button system stroke-input" data-key="Backspace" role="button">
+                            <img src="./imgs/backspace.svg" alt="enter" draggable="false">
+                        </div>
+                    </div>
+                    <div class="key-panel-row">
+                        <div class="keyboard-button symbol-input" data-symbol="\dots" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\vdots" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\ddots" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\cdots" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\cdot" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\mapsto" role="button"></div>
+                        <div class="keyboard-button symbol-input" data-symbol="\dagger" role="button"></div>
                         <div class="keyboard-button system stroke-input" data-key="Left" role="button">
                             <img src="./imgs/chevron-left.svg" alt="arrow-left" draggable="false">
                         </div>
