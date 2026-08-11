@@ -108,133 +108,6 @@ input,textarea {
     overflow: hidden;
 }
 
-/* リボン */
-/* .ribbon {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    width: 100%;
-    padding: 0 .5rem;
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-.ribbon-tab-container {
-    display: flex;
-    width: 100%;
-    height: 2.5rem;
-    padding-bottom: .25rem;
-    overflow-x: auto;
-}
-
-.ribbon-tab {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 0 1rem;
-    background-color: transparent;
-    border: none;
-}
-
-.ribbon-tab-label {
-    color: #444444;
-    font-size: 1rem;
-    line-height: 1rem;
-    white-space: nowrap;
-}
-
-.ribbon-tab.selected .ribbon-tab-label {
-    font-weight: 600;
-}
-
-.ribbon-tab-border-container {
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-    width: calc(100% - 2rem);
-    height: 2.5px;
-    background-color: transparent;
-    border-radius: 10000px;
-}
-
-.ribbon-tab:hover .ribbon-tab-border-container {
-    background-color: #c7c7c7;
-}
-
-.ribbon-tab.selected .ribbon-tab-border-container {
-    background-color: #6557d2;
-}
-
-.ribbon-content-container {
-    display: flex;
-    width: 100%;
-    height: 6.5rem;
-}
-
-.ribbon-content {
-    display: none;
-    width: 100%;
-    padding: .5rem 0;
-    overflow-x: auto;
-}
-
-.ribbon-content.show {
-    display: flex;
-}
-
-.ribbon-content-group {
-    display: flex;
-    height: 100%;
-    padding: 0 .25rem 0 .5rem;
-    border-right: 1px solid #d8d8d8;
-}
-
-.ribbon-content-tool-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding-right: .25rem;
-}
-
-.ribbon-content-tool-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    color: #444444;
-    background-color: transparent;
-    border: none;
-    border-radius: .25rem;
-    cursor: pointer !important;
-}
-
-.ribbon-content-tool-button:hover {
-    background-color: #e9eaeb;
-}
-
-.ribbon-content-tool-button.normal {
-    min-width: 2.5rem;
-    height: 2.5rem;
-}
-
-.ribbon-content-tool-button.small {
-    min-width: 1.75rem;
-    height: 1.75rem;
-}
-
-.ribbon-content-tool-space.normal {
-    min-width: 2.5rem;
-    height: 2.5rem;
-}
-
-.ribbon-content-tool-space.small {
-    min-width: 1.75rem;
-    height: 1.75rem;
-} */
-
 /* エディタ */
 .editor {
     display: flex;
@@ -462,6 +335,10 @@ input,textarea {
 
 .keyboard-button.stretch, .keyboard-margin.stretch{
     flex: 1 0 0;
+}
+
+.keyboard-button.small-font .mq-root-block{
+    font-size: 1rem !important;
 }
 
 .keyboard-margin{
