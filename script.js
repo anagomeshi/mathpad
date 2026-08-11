@@ -242,6 +242,18 @@ document.querySelectorAll('.keyboard-button').forEach(function(btn){
                 case '\\Pi':
                     focusedLine.cmd('\\prod');
                     break;
+                case '\\vec{}':
+                    focusedLine.cmd('\\vec');
+                    break;
+                case '\\overline{}':
+                    focusedLine.cmd('\\overline');
+                    break;
+                case '\\underline{}':
+                    focusedLine.cmd('\\underline');
+                    break;
+                case '\\binom{}{}':
+                    focusedLine.cmd('\\binom');
+                    break;
                 default:
                     focusedLine.write(cmd);
             }
