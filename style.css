@@ -341,6 +341,22 @@ input,textarea {
     font-size: 1rem !important;
 }
 
+.keyboard-button.capslock .capslock-img{
+    display: block;
+}
+
+.keyboard-button.capslock .capslock-active-img{
+    display: none;
+}
+
+.keyboard-button.capslock.active .capslock-img{
+    display: none;
+}
+
+.keyboard-button.capslock .capslock-active-img{
+    display: block;
+}
+
 .keyboard-margin{
     width: 8px;
 }
