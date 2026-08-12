@@ -69,7 +69,7 @@
                     <div class="key-panel-row">
                         <div class="keyboard-button symbol-input" data-symbol="<" role="button"></div>
                         <div class="keyboard-button symbol-input" data-symbol=">" role="button"></div>
-                        <div class="keyboard-button stretch symbol-input" data-symbol="/" role="button"></div>
+                        <div class="keyboard-button stretch cmd-input" data-cmd="/" role="button"></div>
                         <div class="keyboard-button stretch small-font cmd-input" data-cmd="\frac{⬚}{⬚}" role="button"></div>
                         <div class="keyboard-margin"></div>
                         <div class="keyboard-button font-input" data-value="1" role="button"></div>
@@ -124,8 +124,9 @@
                         <div class="keyboard-button font-input" data-value="l" role="button"></div>
                     </div>
                     <div class="key-panel-row">
-                        <div class="keyboard-button stretch system" role="button">
-                            <img src="./imgs/capslock.svg" alt="capslock" draggable="false">
+                        <div class="keyboard-button stretch system capslock" role="button">
+                            <img class="capslock-img" src="./imgs/capslock.svg" alt="capslock" draggable="false">
+                            <img class="capslock-active-img" src="./imgs/capslock-filled.svg" alt="capslock-active" draggable="false">
                         </div>
                         <div class="keyboard-margin"></div>
                         <div class="keyboard-button font-input" data-value="z" role="button"></div>
