@@ -353,7 +353,7 @@ input,textarea {
     display: none;
 }
 
-.keyboard-button.capslock .capslock-active-img{
+.keyboard-button.capslock.active .capslock-active-img{
     display: block;
 }
 
